@@ -9,20 +9,16 @@ class FileStorage:
     __objects = {}
 
     def delete(self, obj=None):
-        if obj in self.__objects:
-            del self.__objects[obj]
-        elif obj == None:
-            pass
+        if obj is not None:
+            key = f"{obj.__class__.__name__}.{obj.id}"
+            self.__objects.pop(key, None)
 
     def all(self, cls=None):
         """Returns a dictionary of models currently in storage"""
-        if cls is not None and cls.__name__ not in HBNBCommand.classes:
-            return []
-
         if cls is not None:
-            return [obj for obj in self.__objects.values() if isinstance(obj, cls)]
+            return {key: obj for key, obj in self.__objects.items() if isinstance(obj, cls)}
         else:
-            return list(self.__objects.values())
+            return self.__objects
 
     def new(self, obj):
         """Adds new object to storage dictionary"""
@@ -57,6 +53,6 @@ class FileStorage:
             with open(FileStorage.__file_path, 'r') as f:
                 temp = json.load(f)
                 for key, val in temp.items():
-                        self.all()[key] = classes[val['__class__']](**val)
+                    self.all()[key] = classes[val['__class__']](**val)
         except FileNotFoundError:
             pass
