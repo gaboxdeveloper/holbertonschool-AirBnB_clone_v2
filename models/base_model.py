@@ -8,7 +8,7 @@ from sqlalchemy.ext.declarative import declaration_base
 
 Base = declaration_base()
 
-class BaseModel:
+class BaseModel(Base):
     """id for Base"""
     id = Column(String(60), primary_key=True, nullable=False, 
     default= str(uuid.uuid4()))
@@ -35,6 +35,9 @@ class BaseModel:
                                                      '%Y-%m-%dT%H:%M:%S.%f')
             del kwargs['__class__']
             self.__dict__.update(kwargs)
+
+        if not hasattr(self, 'name'):
+            self.name = "California"
 
     def __str__(self):
         """Returns a string representation of the instance"""
