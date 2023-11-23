@@ -8,7 +8,7 @@ from sqlalchemy.ext.declarative import declaration_base
 
 Base = declaration_base()
 
-class BaseModel(Base):
+class BaseModel:
     """id for Base"""
     id = Column(String(60), primary_key=True, nullable=False, 
     default= str(uuid.uuid4()))
@@ -36,8 +36,6 @@ class BaseModel(Base):
             del kwargs['__class__']
             self.__dict__.update(kwargs)
 
-        if not hasattr(self, 'name'):
-            self.name = "California"
 
     def __str__(self):
         """Returns a string representation of the instance"""
@@ -48,7 +46,7 @@ class BaseModel(Base):
         """Updates updated_at with current time when instance is changed"""
         from models import storage
         self.updated_at = datetime.now()
-        models.storage.save()
+        storage.save()
 
     def to_dict(self):
         """Convert instance into dict format"""
@@ -59,6 +57,8 @@ class BaseModel(Base):
         dictionary['created_at'] = self.created_at.isoformat()
         dictionary['updated_at'] = self.updated_at.isoformat()
         return dictionary
+    
     def delete(self):
+        """deletes current instance"""
         from models import storage
         storage.delete(self)
