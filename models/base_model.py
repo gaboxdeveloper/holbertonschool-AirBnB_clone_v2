@@ -41,15 +41,17 @@ class BaseModel:
     def save(self):
         """Updates updated_at with current time when instance is changed"""
         self.updated_at = datetime.now()
+        Storage.new(self)
         storage.save()
 
     def to_dict(self):
         """Convert instance into dict format"""
         dictionary = dict(self.__dict__)
-        dictionary.pop('_sa_instance_state', None)
         dictionary['__class__'] = self.__class__.__name__
         dictionary['created_at'] = self.created_at.isoformat()
         dictionary['updated_at'] = self.updated_at.isoformat()
+        if "_sa_instance_state" in my_dict:
+            del(my_dict["_sa_instance_state"])
         return dictionary
 
     def delete(self):
