@@ -21,13 +21,13 @@ class Place(BaseModel, Base):
     user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
     name = Column(String(128), nullable=False)
     description = Column(String(1024), nullable=False)
-    number_rooms = Column(Interger, default=0, nullable=False)
-    number_bathrooms = Column(Interger, default=0, nullable=False )
+    number_rooms = Column(Integer, default=0, nullable=False)
+    number_bathrooms = Column(Integer, default=0, nullable=False )
     max_guest = Column(Integer, default=0, nullable=False)
     price_by_night = Column(Integer, default=0, nullable=False)
     latitude = Column(Float, default=0.0, nullable=False)
     longitude = Column(Float, default=0.0, nullable=False)
-    amenity_id = []
+    amenity_ids = []
     
     
     if getenv('HBNB_TYPE_STORAGE') == 'db':
@@ -51,7 +51,7 @@ class Place(BaseModel, Base):
             """Returns all amenities linked to the place
             """
             am_list = []
-            for amenity in amenity_ids:
+            for amenity in self.amenity_ids:
                 if amenity.id == self.id:
                     am_list.append(amenity)
             return am_list
