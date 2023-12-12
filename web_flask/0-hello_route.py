@@ -1,13 +1,13 @@
 #!/usr/bin/python3
+"""documentation importing Flask"""
 from flask import Flask
-"""documentation"""
+"""documentation calling flask"""
 app = Flask(__name__)
-"""documentation"""
 
 
 @app.route('/', strict_slashes=False)
 def hello_hbnb():
-    """documentation"""
+    """function to return Hello HBNB"""
     return 'Hello HBNB!'
 
 
