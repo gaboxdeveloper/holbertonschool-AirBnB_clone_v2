@@ -13,7 +13,7 @@ def hello_hbnb():
 @app.route('/HBNB', strict_slashes=False)
 def hbnb():
     """function to return HBNB"""
-    return 'HBNB!'
+    return 'HBNB'
 
 
 if __name__ == '__main__':
