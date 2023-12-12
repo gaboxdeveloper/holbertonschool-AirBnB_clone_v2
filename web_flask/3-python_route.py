@@ -24,8 +24,15 @@ def c_isfun(text):
     return f'C {formatted_text}'
 
 
-@app.route('/python/<text>', strict_slashes=False)
+@app.route('/python/', strict_slashes=False)
 def python(text="is cool"):
+    """function to return python"""
+    formatted_text = text.replace('_', ' ')
+    return f'Python {formatted_text}'
+
+
+@app.route('/python/<text>', strict_slashes=False)
+def python_(text):
     """function to return python"""
     formatted_text = text.replace('_', ' ')
     return f'Python {formatted_text}'
