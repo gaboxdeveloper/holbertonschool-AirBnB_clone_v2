@@ -21,7 +21,7 @@ def hbnb():
 def c_isfun(text):
     """function to return C"""
     formatted_text = text.replace('_', ' ')
-    return f'C{formatted_text}'
+    return f'C {formatted_text}'
 
 
 if __name__ == '__main__':
