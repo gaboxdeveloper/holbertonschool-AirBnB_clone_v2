@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """documentation importing Flask"""
-from flask import Flask
+from flask import Flask, render_template
 """documentation calling flask"""
 app = Flask(__name__)
 
