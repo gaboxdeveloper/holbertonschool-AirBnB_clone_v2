@@ -36,7 +36,7 @@ def python(text="is cool"):
 def number(n):
     """function to return a number"""
     if isinstance(n, int):
-        return n
+        return f"{n} is a number"
 
 
 if __name__ == '__main__':
